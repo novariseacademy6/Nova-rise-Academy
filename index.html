@@ -330,6 +330,100 @@
 
   </div>
 </div>
+  <script>
+async function memberLogin() {
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const message = document.getElementById("loginMessage");
+
+  if (!email || !password) {
+    message.style.color = "red";
+    message.textContent = "Please enter email and password.";
+    return;
+  }
+
+  message.style.color = "#333";
+  message.textContent = "Logging in...";
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    message.style.color = "red";
+    message.textContent = error.message;
+    return;
+  }
+
+  message.style.color = "green";
+  message.textContent = "Login successful!";
+
+  setTimeout(() => {
+    window.location.href = "#dashboard";
+  }, 1000);
+}
+
+
+async function memberSignup() {
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const message = document.getElementById("loginMessage");
+
+  if (!email || !password) {
+    message.style.color = "red";
+    message.textContent = "Please enter email and password.";
+    return;
+  }
+
+  if (password.length < 6) {
+    message.style.color = "red";
+    message.textContent = "Password must be at least 6 characters.";
+    return;
+  }
+
+  message.style.color = "#333";
+  message.textContent = "Creating account...";
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    message.style.color = "red";
+    message.textContent = error.message;
+    return;
+  }
+
+  if (data.session) {
+    message.style.color = "green";
+    message.textContent = "Account created successfully!";
+  } else {
+    message.style.color = "green";
+    message.textContent = "Account created. Please check your email to verify your account.";
+  }
+}
+
+
+function openLogin() {
+  document.getElementById("loginModal").style.display = "flex";
+}
+
+
+function closeLogin() {
+  document.getElementById("loginModal").style.display = "none";
+}
+
+
+window.addEventListener("click", function(event) {
+  const modal = document.getElementById("loginModal");
+
+  if (event.target === modal) {
+    closeLogin();
+  }
+});
+</script>
 </body>
 </html>
  
