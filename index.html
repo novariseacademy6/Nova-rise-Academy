@@ -359,11 +359,10 @@ async function memberLogin() {
   message.style.color = "green";
   message.textContent = "Login successful!";
 
-  setTimeout(() => {
   document.getElementById("loginModal").style.display = "none";
-  document.getElementById("memberDashboard").style.display = "block";
-  window.location.hash = "dashboard";
-}, 1000);
+document.getElementById("memberDashboard").style.display = "block";
+window.location.hash = "dashboard";
+document.getElementById("memberDashboard").scrollIntoView();
 }
 
 
