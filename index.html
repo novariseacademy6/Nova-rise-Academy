@@ -360,8 +360,10 @@ async function memberLogin() {
   message.textContent = "Login successful!";
 
   setTimeout(() => {
-    window.location.href = "#dashboard";
-  }, 1000);
+  document.getElementById("loginModal").style.display = "none";
+  document.getElementById("memberDashboard").style.display = "block";
+  window.location.hash = "dashboard";
+}, 1000);
 }
 
 
