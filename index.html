@@ -525,64 +525,346 @@ window.addEventListener("click", function(event) {
   }
 </style>
 
-<div id="memberDashboard">
-  <div class="dashboard-box">
+<div id="memberDashboard" style="display:none;min-height:100vh;background:#f4f7fb;font-family:Arial,sans-serif;color:#172033;box-sizing:border-box;">
 
-    <div class="dashboard-header">
-      <h1>Nova Rise Academy</h1>
-      <p>Welcome to your Member Dashboard</p>
-    </div>
+  <div style="display:flex;min-height:100vh;">
 
-    <div class="dashboard-grid">
+    <!-- SIDEBAR -->
+    <aside style="width:240px;background:#111827;color:white;padding:22px 15px;box-sizing:border-box;flex-shrink:0;">
 
-      <div class="dashboard-card">
-        <h3>💰 Today Income</h3>
-        <div class="amount">₹0</div>
+      <div style="font-size:21px;font-weight:bold;padding:10px 12px 25px;">
+        Nova Rise
+        <div style="font-size:13px;color:#9ca3af;margin-top:4px;">Member Panel</div>
       </div>
 
-      <div class="dashboard-card">
-        <h3>📊 Last 7 Days</h3>
-        <div class="amount">₹0</div>
+      <button onclick="openDashboardPage('home')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:#2563eb;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        🏠 Dashboard
+      </button>
+
+      <button onclick="openDashboardPage('referral')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        🔗 My Referral
+      </button>
+
+      <button onclick="openDashboardPage('team')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        👥 My Team
+      </button>
+
+      <button onclick="openDashboardPage('leads')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        📋 My Leads
+      </button>
+
+      <button onclick="openDashboardPage('kyc')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        🪪 KYC
+      </button>
+
+      <button onclick="openDashboardPage('withdrawal')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        💸 Withdrawal
+      </button>
+
+      <button onclick="openDashboardPage('notifications')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        🔔 Notifications
+      </button>
+
+      <button onclick="openDashboardPage('support')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        🎫 Support
+      </button>
+
+      <button onclick="openDashboardPage('membership')" style="width:100%;padding:13px;margin-bottom:7px;border:0;border-radius:10px;background:transparent;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        📦 Membership
+      </button>
+
+      <button onclick="memberLogout()" style="width:100%;padding:13px;margin-top:20px;border:0;border-radius:10px;background:#dc2626;color:white;text-align:left;font-size:14px;cursor:pointer;">
+        🚪 Logout
+      </button>
+
+    </aside>
+
+
+    <!-- MAIN AREA -->
+    <main style="flex:1;padding:25px;box-sizing:border-box;min-width:0;">
+
+      <!-- TOP BAR -->
+      <div style="background:white;border-radius:16px;padding:18px 22px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 15px rgba(0,0,0,.06);">
+        <div>
+          <div style="font-size:24px;font-weight:bold;">Member Dashboard</div>
+          <div id="memberEmail" style="font-size:13px;color:#6b7280;margin-top:5px;">Welcome to Nova Rise Academy</div>
+        </div>
+
+        <div style="font-size:28px;">🔔</div>
       </div>
 
-      <div class="dashboard-card">
-        <h3>📅 Last 30 Days</h3>
-        <div class="amount">₹0</div>
+
+      <!-- HOME -->
+      <div id="dashboardHome">
+
+        <div style="background:linear-gradient(135deg,#2563eb,#4f46e5);color:white;border-radius:18px;padding:25px;margin-bottom:22px;">
+          <div style="font-size:27px;font-weight:bold;">Welcome to Nova Rise Academy</div>
+          <div style="margin-top:8px;opacity:.9;">Manage your work, referrals, leads and account from one place.</div>
+        </div>
+
+
+        <!-- STATS -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px;">
+
+          <div style="background:white;border-radius:15px;padding:20px;box-shadow:0 3px 15px rgba(0,0,0,.06);">
+            <div style="color:#6b7280;font-size:13px;">Today Income</div>
+            <div style="font-size:25px;font-weight:bold;margin-top:8px;">₹0</div>
+          </div>
+
+          <div style="background:white;border-radius:15px;padding:20px;box-shadow:0 3px 15px rgba(0,0,0,.06);">
+            <div style="color:#6b7280;font-size:13px;">Last 7 Days</div>
+            <div style="font-size:25px;font-weight:bold;margin-top:8px;">₹0</div>
+          </div>
+
+          <div style="background:white;border-radius:15px;padding:20px;box-shadow:0 3px 15px rgba(0,0,0,.06);">
+            <div style="color:#6b7280;font-size:13px;">Last 30 Days</div>
+            <div style="font-size:25px;font-weight:bold;margin-top:8px;">₹0</div>
+          </div>
+
+          <div style="background:white;border-radius:15px;padding:20px;box-shadow:0 3px 15px rgba(0,0,0,.06);">
+            <div style="color:#6b7280;font-size:13px;">Available Balance</div>
+            <div style="font-size:25px;font-weight:bold;margin-top:8px;">₹0</div>
+          </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+        <div style="font-size:20px;font-weight:bold;margin-bottom:14px;">Quick Actions</div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;">
+
+          <button onclick="openDashboardPage('referral')" style="background:white;border:0;border-radius:15px;padding:22px;text-align:left;box-shadow:0 3px 15px rgba(0,0,0,.06);cursor:pointer;">
+            <div style="font-size:28px;">🔗</div>
+            <div style="font-weight:bold;margin-top:10px;">My Referral</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:5px;">View your referral link</div>
+          </button>
+
+          <button onclick="openDashboardPage('leads')" style="background:white;border:0;border-radius:15px;padding:22px;text-align:left;box-shadow:0 3px 15px rgba(0,0,0,.06);cursor:pointer;">
+            <div style="font-size:28px;">📋</div>
+            <div style="font-weight:bold;margin-top:10px;">My Leads</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:5px;">Manage assigned leads</div>
+          </button>
+
+          <button onclick="openDashboardPage('withdrawal')" style="background:white;border:0;border-radius:15px;padding:22px;text-align:left;box-shadow:0 3px 15px rgba(0,0,0,.06);cursor:pointer;">
+            <div style="font-size:28px;">💸</div>
+            <div style="font-weight:bold;margin-top:10px;">Withdrawal</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:5px;">Manage withdrawal requests</div>
+          </button>
+
+        </div>
+
       </div>
 
-      <div class="dashboard-card">
-        <h3>💵 All Time Income</h3>
-        <div class="amount">₹0</div>
+
+      <!-- OTHER SECTIONS -->
+
+      <div id="dashboardPage" style="display:none;background:white;border-radius:18px;padding:25px;box-shadow:0 3px 15px rgba(0,0,0,.06);">
+
+        <div id="pageTitle" style="font-size:25px;font-weight:bold;margin-bottom:10px;">Member Section</div>
+
+        <div id="pageDescription" style="color:#6b7280;margin-bottom:20px;">
+          Select an option from the menu.
+        </div>
+
+        <div id="pageContent" style="background:#f8fafc;border-radius:14px;padding:25px;">
+        </div>
+
       </div>
 
-      <div class="dashboard-card">
-        <h3>👥 My Referrals</h3>
-        <div class="amount">0</div>
-      </div>
-
-      <div class="dashboard-card">
-        <h3>💸 Available Balance</h3>
-        <div class="amount">₹0</div>
-      </div>
-
-    </div>
-
-    <div class="dashboard-menu">
-      <button>🔗 My Referral Link</button>
-      <button>👥 My Team</button>
-      <button>📋 My Leads</button>
-      <button>🪪 KYC</button>
-      <button>💸 Withdrawal</button>
-      <button>🔔 Notifications</button>
-      <button>🎫 Support</button>
-      <button>📦 Membership</button>
-    </div>
-
-    <button class="logout-btn" onclick="memberLogout()">
-      Logout
-    </button>
+    </main>
 
   </div>
+
+
+  <!-- MOBILE MENU -->
+  <style>
+    @media(max-width:700px){
+
+      #memberDashboard > div{
+        display:block !important;
+      }
+
+      #memberDashboard aside{
+        width:100% !important;
+        min-height:auto !important;
+        padding:12px !important;
+      }
+
+      #memberDashboard aside > div:first-child{
+        padding:8px 10px 15px !important;
+      }
+
+      #memberDashboard aside button{
+        display:inline-block !important;
+        width:auto !important;
+        margin:3px !important;
+        padding:10px 12px !important;
+      }
+
+      #memberDashboard main{
+        padding:12px !important;
+      }
+
+      #memberDashboard main > div:first-child{
+        padding:15px !important;
+      }
+
+      #memberDashboard [style*="grid-template-columns:repeat(4,1fr)"]{
+        grid-template-columns:repeat(2,1fr) !important;
+      }
+
+      #memberDashboard [style*="grid-template-columns:repeat(3,1fr)"]{
+        grid-template-columns:1fr !important;
+      }
+
+    }
+  </style>
+
+
+  <script>
+
+    function openDashboardPage(page){
+
+      document.getElementById("dashboardHome").style.display = "none";
+      document.getElementById("dashboardPage").style.display = "block";
+
+      const title = document.getElementById("pageTitle");
+      const description = document.getElementById("pageDescription");
+      const content = document.getElementById("pageContent");
+
+      if(page === "referral"){
+        title.textContent = "🔗 My Referral";
+        description.textContent = "Your personal referral information.";
+        content.innerHTML = `
+          <h3>Personal Referral Link</h3>
+          <input id="referralLink" value="Loading..." readonly
+            style="width:100%;padding:13px;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;margin:10px 0;">
+          <button onclick="copyReferralLink()" style="padding:12px 18px;border:0;border-radius:8px;background:#2563eb;color:white;cursor:pointer;">
+            Copy Referral Link
+          </button>
+          <p style="color:#6b7280;margin-top:15px;">Referral count: 0</p>
+        `;
+
+        createReferralLink();
+      }
+
+      if(page === "team"){
+        title.textContent = "👥 My Team";
+        description.textContent = "Your team members will appear here.";
+        content.innerHTML = `
+          <h3>Team Members</h3>
+          <p style="color:#6b7280;">No team members yet.</p>
+        `;
+      }
+
+      if(page === "leads"){
+        title.textContent = "📋 My Leads";
+        description.textContent = "Leads assigned by the admin will appear here.";
+        content.innerHTML = `
+          <h3>Lead Management</h3>
+          <p style="color:#6b7280;">No leads assigned yet.</p>
+        `;
+      }
+
+      if(page === "kyc"){
+        title.textContent = "🪪 KYC";
+        description.textContent = "Complete your KYC information.";
+        content.innerHTML = `
+          <h3>KYC Status</h3>
+          <p style="color:#6b7280;">KYC not submitted yet.</p>
+          <button style="padding:12px 18px;border:0;border-radius:8px;background:#2563eb;color:white;">
+            Submit KYC
+          </button>
+        `;
+      }
+
+      if(page === "withdrawal"){
+        title.textContent = "💸 Withdrawal";
+        description.textContent = "Manage your withdrawal requests.";
+        content.innerHTML = `
+          <h3>Available Balance: ₹0</h3>
+          <input type="number" placeholder="Enter withdrawal amount"
+            style="width:100%;padding:13px;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;margin:15px 0;">
+          <button style="padding:12px 18px;border:0;border-radius:8px;background:#2563eb;color:white;">
+            Request Withdrawal
+          </button>
+        `;
+      }
+
+      if(page === "notifications"){
+        title.textContent = "🔔 Notifications";
+        description.textContent = "Your latest notifications.";
+        content.innerHTML = `
+          <p style="color:#6b7280;">No new notifications.</p>
+        `;
+      }
+
+      if(page === "support"){
+        title.textContent = "🎫 Support";
+        description.textContent = "Need help? Create a support request.";
+        content.innerHTML = `
+          <h3>Support Center</h3>
+          <textarea placeholder="Describe your issue..."
+            style="width:100%;height:120px;padding:13px;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;"></textarea>
+          <button style="margin-top:12px;padding:12px 18px;border:0;border-radius:8px;background:#2563eb;color:white;">
+            Submit Ticket
+          </button>
+        `;
+      }
+
+      if(page === "membership"){
+        title.textContent = "📦 Membership";
+        description.textContent = "Your membership information.";
+        content.innerHTML = `
+          <h3>Membership Plans</h3>
+          <p>Basic — ₹349</p>
+          <p>Standard — ₹849</p>
+          <p>Premium — ₹1,249</p>
+        `;
+      }
+
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
+
+    async function createReferralLink(){
+
+      const { data } = await supabaseClient.auth.getUser();
+
+      if(data.user){
+
+        const link =
+          window.location.origin +
+          window.location.pathname +
+          "?ref=" +
+          data.user.id;
+
+        const input = document.getElementById("referralLink");
+
+        if(input){
+          input.value = link;
+        }
+      }
+    }
+
+
+    function copyReferralLink(){
+
+      const input = document.getElementById("referralLink");
+
+      if(input){
+        navigator.clipboard.writeText(input.value);
+        alert("Referral link copied!");
+      }
+    }
+
+
+    document.getElementById("memberEmail").textContent =
+      "Member Account";
+
+  </script>
+
 </div>
 
 <script>
