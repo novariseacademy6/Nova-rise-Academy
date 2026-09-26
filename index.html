@@ -886,6 +886,208 @@ async function memberLogout() {
 
 showMemberDashboard();
 </script>
+  <!-- REFERRAL REGISTRATION -->
+<style>
+  #referralRegisterBox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .referral-register-card {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 40px rgba(0,0,0,.3);
+  }
+
+  .referral-register-card h2 {
+    text-align: center;
+    margin: 0 0 8px;
+  }
+
+  .referral-register-card p {
+    text-align: center;
+    color: #666;
+  }
+
+  .referral-register-card input {
+    width: 100%;
+    padding: 13px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    box-sizing: border-box;
+  }
+
+  .referral-register-card button {
+    width: 100%;
+    padding: 13px;
+    margin-top: 15px;
+    border: 0;
+    border-radius: 9px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #referralRegisterMessage {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+</style>
+
+<div id="referralRegisterBox">
+  <div class="referral-register-card">
+
+    <h2>Nova Rise Academy</h2>
+
+    <p>Create your Member Account</p>
+
+    <input
+      id="refName"
+      type="text"
+      placeholder="Full Name"
+    >
+
+    <input
+      id="refEmail"
+      type="email"
+      placeholder="Email Address"
+    >
+
+    <input
+      id="refPassword"
+      type="password"
+      placeholder="Create Password"
+    >
+
+    <button onclick="createReferralAccount()">
+      Create Account
+    </button>
+
+    <p id="referralRegisterMessage"></p>
+
+  </div>
+</div>
+
+<script>
+
+function getReferralId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("ref");
+}
+
+
+function openReferralRegistration() {
+
+  const referralId = getReferralId();
+
+  if (referralId) {
+    document.getElementById("referralRegisterBox").style.display = "flex";
+  }
+
+}
+
+
+async function createReferralAccount() {
+
+  const name = document.getElementById("refName").value.trim();
+  const email = document.getElementById("refEmail").value.trim();
+  const password = document.getElementById("refPassword").value;
+
+  const message =
+    document.getElementById("referralRegisterMessage");
+
+  const referralId = getReferralId();
+
+  if (!name || !email || !password) {
+
+    message.style.color = "red";
+    message.textContent =
+      "Please fill all details.";
+
+    return;
+  }
+
+  if (password.length < 6) {
+
+    message.style.color = "red";
+    message.textContent =
+      "Password must be at least 6 characters.";
+
+    return;
+  }
+
+  if (!referralId) {
+
+    message.style.color = "red";
+    message.textContent =
+      "Referral link is missing.";
+
+    return;
+  }
+
+  message.style.color = "#333";
+  message.textContent = "Creating account...";
+
+  const { data, error } =
+    await supabaseClient.auth.signUp({
+
+      email: email,
+
+      password: password,
+
+      options: {
+        data: {
+          full_name: name,
+          referral_id: referralId
+        }
+      }
+
+    });
+
+
+  if (error) {
+
+    message.style.color = "red";
+    message.textContent = error.message;
+
+    return;
+  }
+
+
+  if (data.user) {
+
+    message.style.color = "green";
+
+    message.textContent =
+      "Account created successfully. Please verify your email.";
+
+  }
+
+}
+
+
+/* Check referral link when page opens */
+
+window.addEventListener("load", function() {
+
+  openReferralRegistration();
+
+});
+
+</script>
+  
 </body>
 </html>
  
